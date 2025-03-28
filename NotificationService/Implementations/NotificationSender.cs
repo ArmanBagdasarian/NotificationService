@@ -13,7 +13,7 @@ namespace NotificationService.Implementations
           _context = context;
             _logger = logger;
         }
-        public void Send(INotificationService notificationService, NotificationSendRequestModel model)// return bool
+        public bool Send(INotificationService notificationService, NotificationSendRequestModel model)
         {
             var result = notificationService.Send(model);
             notificationService.Dispose();
@@ -40,7 +40,7 @@ namespace NotificationService.Implementations
                 _logger.LogWarning($"Unable send notification to {model.Destination} via {model.NotificationType}");
             }
             
-            //return result
+            return result
         }
     }
 }

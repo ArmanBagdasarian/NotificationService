@@ -4,6 +4,6 @@ namespace NotificationService.Abstractions
 {
     public interface INotificationSender
     {
-        public void Send(INotificationService notificationService, NotificationSendRequestModel model);
+        public bool Send(INotificationService notificationService, NotificationSendRequestModel model);
     }
 }

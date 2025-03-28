@@ -59,8 +59,8 @@ namespace NotificationService.Controllers
                     notificationService = new EmailNotificationService();
                     break;
             }
-            _notificationSender.Send(notificationService, model);
-            return Ok();
+           var status = _notificationSender.Send(notificationService, model);
+            return Ok(new {status});
         }
 
     }
