@@ -7,9 +7,11 @@ namespace NotificationService.Implementations
     public class NotificationSender : INotificationSender
     {
         private readonly DataContext _context;
-        public NotificationSender(DataContext context) 
+        private readonly ILogger<NotificationSender> _logger;
+        public NotificationSender(DataContext context, ILogger<NotificationSender> logger) 
         {
           _context = context;
+            _logger = logger;
         }
         public void Send(INotificationService notificationService, NotificationSendRequestModel model)// return bool
         {
@@ -29,6 +31,15 @@ namespace NotificationService.Implementations
 
             _context.Notifications.Add(notification);
             _context.SaveChanges();
+            if(result)
+            {
+              _logger.LogInformation($"Notification sent to {model.Destination} via {model.NotificationType}");
+            }
+            else
+            {
+                _logger.LogWarning($"Unable send notification to {model.Destination} via {model.NotificationType}");
+            }
+            
             //return result
         }
     }
