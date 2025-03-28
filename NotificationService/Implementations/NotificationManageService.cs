@@ -14,6 +14,7 @@ namespace NotificationService.Implementations
         }
         public List<NotificationResponseModel> GetAll()
         {
+           
             return _context.Notifications.Select(n => new NotificationResponseModel
             {
                 Id = n.Id,
